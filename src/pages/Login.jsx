@@ -9,6 +9,7 @@ export function Login() {
     const [credentials, setCredentials] = useState({ userName: '', password: '' })
     const [showTable, setShowTable] = useState(false)
     const [marketers, setMarkerets] = useState(null)
+    const [descending, setDescending] = useState(true)
 
     useEffect(() => {
         marketService.query()
@@ -22,9 +23,17 @@ export function Login() {
 
     function onSubmitForm(ev) {
         ev.preventDefault()
-        console.log('onSubmitForm')
         setCredentials({ userName: '', password: '' })
         setShowTable(true)
+    }
+
+    function onSortBy(sortBy) {
+        const diff = descending ? 1 : -1
+        setMarkerets(prev => {
+            prev.sort((m1, m2) => m1[sortBy].localeCompare(m2[sortBy]) * diff)
+            return [...prev]
+        })
+        setDescending(prev => !prev)
     }
 
     return (
@@ -52,7 +61,7 @@ export function Login() {
             </form>
 
 
-            {showTable && <MarketerTable marketers={marketers} />}
+            {showTable && <MarketerTable marketers={marketers} onSortBy={onSortBy} />}
         </section>
     )
 }

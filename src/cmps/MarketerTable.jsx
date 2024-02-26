@@ -1,21 +1,25 @@
 
 
-export function MarketerTable({ marketers }) {
+export function MarketerTable({ marketers, onSortBy }) {
 
     return (
-        <section>
+        <section className="marketer-table">
             <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th onClick={() => onSortBy('firstName')}>First Name</th>
+                        <th onClick={() => onSortBy('lastName')}>Last Name</th>
+                        <th onClick={() => onSortBy('email')}>Email</th>
+                    </tr>
+                </thead>
 
-                {marketers.map(m => <tr key={m._id}>
-                    <td>{m.firstName}</td>
-                    <td>{m.lastName}</td>
-                    <td>{m.email}</td>
-                </tr>)}
+                <tbody>
+                    {marketers.map(m => <tr key={m._id}>
+                        <td>{m.firstName}</td>
+                        <td>{m.lastName}</td>
+                        <td>{m.email}</td>
+                    </tr>)}
+                </tbody>
             </table>
         </section>
     )
