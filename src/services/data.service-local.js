@@ -4,17 +4,39 @@ import { storageService } from './async-storage.service.js'
 const STORAGE_KEY = 'carDB'
 const PAGE_SIZE = 3
 
-export const carService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyCar,
-    getDefaultFilter,
-    getLabels,
-    getDefaultSort
+export const dataService = {
+    // query,
+    // getById,
+    // save,
+    // remove,
+    // getEmptyCar,
+    // getDefaultFilter,
+    // getLabels,
+    // getDefaultSort
+    getDataToAdd,
+    save
 }
 
+function getDataToAdd() {
+    return {
+        firstName: '',
+        lastName: '',
+    }
+}
+
+function save(data) {
+    if (data._id) {
+        return storageService.put(STORAGE_KEY, data)
+            .then((savedData) => {
+                return savedData
+            })
+    } else {
+        return storageService.post(STORAGE_KEY, data)
+            .then((savedData) => {
+                return savedData
+            })
+    }
+}
 
 function query(filterBy = {}, sortBy = {}) {
 
@@ -74,28 +96,7 @@ function remove(carId) {
     return storageService.remove(STORAGE_KEY, carId)
 
 }
-function save(car) {
-    if (car._id) {
-        return storageService.put(STORAGE_KEY, car)
-            .then((savedCar) => {
-                return savedCar
-            })
-    } else {
-        return storageService.post(STORAGE_KEY, car)
-            .then((savedCar) => {
-                return savedCar
-            })
-    }
-}
-function getEmptyCar() {
-    return {
-        name: '',
-        inStock: true,
-        price: 0,
-        labels: []
 
-    }
-}
 function getDefaultFilter() {
     return { name: '', inStock: 'all', labels: [], price: '' }
 }
