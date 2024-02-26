@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { NavLink } from "react-router-dom";
+
 import { MarketerForm } from '../cmps/MarketerForm'
 import { marketService } from '../services/market.service-axios'
 import { UserMsg } from '../cmps/UserMsg'
@@ -10,10 +12,8 @@ export function Index() {
 
 
     useEffect(() => {
-
         marketService.query()
             .then(setMarkerets)
-
     }, [])
 
     function onSetChangeData(ev) {
@@ -63,6 +63,7 @@ export function Index() {
 
     return (
         <section className="index">
+            <NavLink to={'/Login'}> Go To Login Page</NavLink>
             {marketers && <h2>{marketers.length} marketers have joined so far!</h2>}
             <UserMsg msg={msg} />
             <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} onResetForm={onResetForm} />

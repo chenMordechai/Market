@@ -3,7 +3,6 @@
 export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm, onResetForm }) {
     return (
         <section className="marketer-form">
-            <h1>Marketer Form</h1>
             <form onSubmit={onSubmitForm}>
                 <input
                     onChange={onSetChangeData}
