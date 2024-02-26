@@ -1,0 +1,14 @@
+.marketer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.marketer-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+}

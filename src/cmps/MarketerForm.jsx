@@ -1,6 +1,6 @@
 
 
-export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm }) {
+export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm, onResetForm }) {
     return (
         <section className="marketer-form">
             <h1>Marketer Form</h1>
@@ -25,7 +25,8 @@ export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm }) {
                     placeholder="Email"
                     type="email"
                     id="email"
-                    name="email" />
+                    name="email"
+                />
                 <input
                     onChange={onSetChangeData}
                     value={dataToAdd.website}
@@ -47,6 +48,7 @@ export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm }) {
                     value={dataToAdd.experience}
                     id="experience"
                     name="experience">
+                    <option value=""></option>
                     <option value="no experience">no experience</option>
                     <option value="0-1 years">0-1 years</option>
                     <option value="1-2 years">1-2 years</option>
@@ -66,6 +68,8 @@ export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm }) {
                 />
                 <button>SUBMIT</button>
             </form>
+            <button onClick={onResetForm}>Reset Form</button>
+
         </section>
     )
 }

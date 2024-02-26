@@ -4,7 +4,6 @@ import { marketService } from '../services/market.service-axios'
 
 export function Index() {
     const [dataToAdd, setDataToAdd] = useState(marketService.getDataToAdd())
-    console.log('dataToAdd:', dataToAdd)
     useEffect(() => {
 
     }, [])
@@ -17,16 +16,25 @@ export function Index() {
     function onSubmitForm(ev) {
         console.log('onSubmitForm')
         ev.preventDefault()
+        // if (!dataToAdd.email) console.log('Fill out email field')
         marketService.save(dataToAdd)
             .then(newData => {
-                console.log('newData:', newData)
+                console.log('Add marketer to databade:', newData)
             })
+            .catch(err => {
+                console.log(err, 'Failed to add marketer')
+            })
+
+    }
+
+    function onResetForm() {
+        setDataToAdd(marketService.getDataToAdd())
     }
 
     return (
         <section className="index">
-            <h1>Index</h1>
-            <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} />
+            <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} onResetForm={onResetForm} />
+
         </section>
     )
 }

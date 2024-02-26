@@ -2,4 +2,5 @@
 @import "base.css";
 
 /* Components */
-@import "cmps/CarIndex.css";
+@import "cmps/Index.css";
+@import "cmps/MarketerForm.css";
