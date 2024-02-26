@@ -6,13 +6,13 @@ import { httpService } from './http.service.js'
 const BASE_URL = 'marketer/'
 
 export const marketService = {
-    // query,
     // getById,
     // remove,
     // getEmptyToy,
     // getDefaultFilter
     getDataToAdd,
     save,
+    query,
 }
 
 function getDataToAdd() {
@@ -36,16 +36,8 @@ function save(data) {
     }
 }
 
-
-
-function query(filterBy = {}) {
-    return httpService.get(BASE_URL, filterBy)
-    // .then(toys => {
-    //     return toys.filter(toy =>
-    //         regExp.test(toy.vendor) &&
-    //         toy.price <= filterBy.maxPrice
-    //     )
-    // })
+function query() {
+    return httpService.get(BASE_URL)
 }
 
 function getById(toyId) {

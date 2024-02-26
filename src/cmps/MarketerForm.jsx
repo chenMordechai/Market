@@ -26,6 +26,7 @@ export function MarketerForm({ dataToAdd, onSetChangeData, onSubmitForm, onReset
                     type="email"
                     id="email"
                     name="email"
+                    required
                 />
                 <input
                     onChange={onSetChangeData}
