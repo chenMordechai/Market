@@ -2,4 +2,9 @@
     width: 500px;
     background-color: var(--clr1bg);
     padding: 20px;
+    text-align: center;
+
+    h2 {
+        background-color: lightcyan;
+    }
 }

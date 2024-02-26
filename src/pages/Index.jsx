@@ -12,9 +12,7 @@ export function Index() {
     useEffect(() => {
 
         marketService.query()
-            .then(marketers => {
-                console.log('marketers:', marketers)
-            })
+            .then(setMarkerets)
 
     }, [])
 
@@ -25,7 +23,15 @@ export function Index() {
 
     function onSubmitForm(ev) {
         ev.preventDefault()
-        // if (!dataToAdd.email) console.log('Fill out email field')
+        if (!dataToAdd.email) {
+            console.log('Fill out email field')
+            showUserMsg('Fill out email field')
+            return
+        } else if (isAlreadySubmitted(dataToAdd.email)) {
+            console.log('Already Submitted')
+            showUserMsg('Already Submitted')
+            return
+        }
         marketService.save(dataToAdd)
             .then(newData => {
                 console.log('Add marketer to databade:', newData)
@@ -37,6 +43,10 @@ export function Index() {
                 showUserMsg('Failed')
             })
 
+    }
+
+    function isAlreadySubmitted(email) {
+        return !marketers.every(marketer => marketer.email !== email)
     }
 
     function showUserMsg(msg) {
@@ -53,6 +63,7 @@ export function Index() {
 
     return (
         <section className="index">
+            {marketers && <h2>{marketers.length} marketers have joined so far!</h2>}
             <UserMsg msg={msg} />
             <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} onResetForm={onResetForm} />
         </section>
