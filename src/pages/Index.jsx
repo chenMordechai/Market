@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { MarketerForm } from '../cmps/MarketerForm'
-import { dataService } from '../services/data.service-local'
+import { marketService } from '../services/market.service-axios'
 
 export function Index() {
-    const [dataToAdd, setDataToAdd] = useState(dataService.getDataToAdd())
+    const [dataToAdd, setDataToAdd] = useState(marketService.getDataToAdd())
     console.log('dataToAdd:', dataToAdd)
     useEffect(() => {
 
@@ -15,8 +15,9 @@ export function Index() {
     }
 
     function onSubmitForm(ev) {
+        console.log('onSubmitForm')
         ev.preventDefault()
-        dataService.save(dataToAdd)
+        marketService.save(dataToAdd)
             .then(newData => {
                 console.log('newData:', newData)
             })
@@ -25,7 +26,7 @@ export function Index() {
     return (
         <section className="index">
             <h1>Index</h1>
-            <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} />
+            <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} />
         </section>
     )
 }
