@@ -35,6 +35,7 @@ export function Index() {
         marketService.save(dataToAdd)
             .then(newData => {
                 console.log('Add marketer to databade:', newData)
+                setMarkerets(prev=>[...prev,newData])
                 onResetForm()
                 showUserMsg('Thank you!')
             })
