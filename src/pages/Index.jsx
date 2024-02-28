@@ -24,23 +24,19 @@ export function Index() {
     function onSubmitForm(ev) {
         ev.preventDefault()
         if (!dataToAdd.email) {
-            console.log('Fill out email field')
             showUserMsg('Fill out email field','red')
             return
         } else if (isAlreadySubmitted(dataToAdd.email)) {
-            console.log('Already Submitted')
             showUserMsg('Already Submitted','red')
             return
         }
         marketService.save(dataToAdd)
             .then(newData => {
-                console.log('Add marketer to databade:', newData)
                 setMarkerets(prev=>[...prev,newData])
                 onResetForm()
                 showUserMsg('Thank you!','green')
             })
             .catch(err => {
-                console.log(err, 'Failed to add marketer')
                 showUserMsg('Failed','red')
             })
 
