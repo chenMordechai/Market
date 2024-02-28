@@ -8,7 +8,7 @@ import { UserMsg } from '../cmps/UserMsg'
 export function Index() {
     const [marketers, setMarkerets] = useState(null)
     const [dataToAdd, setDataToAdd] = useState(marketService.getDataToAdd())
-    const [msg, setMsg] = useState('')
+    const [msg, setMsg] = useState(null)
 
 
     useEffect(() => {
@@ -25,11 +25,11 @@ export function Index() {
         ev.preventDefault()
         if (!dataToAdd.email) {
             console.log('Fill out email field')
-            showUserMsg('Fill out email field')
+            showUserMsg('Fill out email field','red')
             return
         } else if (isAlreadySubmitted(dataToAdd.email)) {
             console.log('Already Submitted')
-            showUserMsg('Already Submitted')
+            showUserMsg('Already Submitted','red')
             return
         }
         marketService.save(dataToAdd)
@@ -37,11 +37,11 @@ export function Index() {
                 console.log('Add marketer to databade:', newData)
                 setMarkerets(prev=>[...prev,newData])
                 onResetForm()
-                showUserMsg('Thank you!')
+                showUserMsg('Thank you!','green')
             })
             .catch(err => {
                 console.log(err, 'Failed to add marketer')
-                showUserMsg('Failed')
+                showUserMsg('Failed','red')
             })
 
     }
@@ -50,10 +50,10 @@ export function Index() {
         return !marketers.every(marketer => marketer.email !== email)
     }
 
-    function showUserMsg(msg) {
-        setMsg(msg)
+    function showUserMsg(txt,color) {
+        setMsg({txt,color})
         setTimeout(() => {
-            setMsg('')
+            setMsg(null)
         }, 2000);
 
     }
@@ -66,7 +66,7 @@ export function Index() {
         <section className="index">
             <NavLink to={'/Login'}> Go To Login Page</NavLink>
             {marketers && <h2>{marketers.length} marketers have joined so far!</h2>}
-            <UserMsg msg={msg} />
+           {msg && <UserMsg msg={msg} />}
             <MarketerForm dataToAdd={dataToAdd} onSetChangeData={onSetChangeData} onSubmitForm={onSubmitForm} onResetForm={onResetForm} />
         </section>
     )
