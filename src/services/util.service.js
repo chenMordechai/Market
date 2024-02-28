@@ -6,7 +6,8 @@ export const utilService = {
     saveToStorage,
     animateCSS,
     debounce,
-    getAssetSrc
+    getAssetSrc,
+    getDate
 }
 
 function makeId(length = 6) {
@@ -77,4 +78,8 @@ function getAssetSrc(name) {
     const modules = import.meta.globEager('/src/assets/img/*')
     const mod = modules[path]
     return mod.default
+}
+
+function getDate(d){
+    return d.split('T')[0] +' '+d.split('T')[1].split('.')[0]
 }

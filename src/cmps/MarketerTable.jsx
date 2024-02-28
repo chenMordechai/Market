@@ -1,4 +1,4 @@
-
+import { utilService } from '../services/util.service'
 
 export function MarketerTable({ marketers, onSortBy }) {
 
@@ -10,6 +10,7 @@ export function MarketerTable({ marketers, onSortBy }) {
                         <th onClick={() => onSortBy('firstName')}>First Name</th>
                         <th onClick={() => onSortBy('lastName')}>Last Name</th>
                         <th onClick={() => onSortBy('email')}>Email</th>
+                        <th onClick={() => onSortBy('date')}>Date</th>
                     </tr>
                 </thead>
 
@@ -18,6 +19,7 @@ export function MarketerTable({ marketers, onSortBy }) {
                         <td>{m.firstName}</td>
                         <td>{m.lastName}</td>
                         <td>{m.email}</td>
+                        <td>{utilService.getDate(m.date)}</td>
                     </tr>)}
                 </tbody>
             </table>
